@@ -10,10 +10,15 @@ const routes = [
     component: () => import('@/components/LoginPage.vue'),
     meta: { layout: 'default' },
   },
+  { 
+    path: '/register', 
+    component: () => import('@/components/RegisterPage.vue'),
+    meta: { layout: 'default' },
+  },
  
 ]
 
 export default createRouter({
-    history: createWebHistory(),
-    routes,
-  })
+  history: createWebHistory(),
+  routes,
+})

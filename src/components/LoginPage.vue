@@ -14,6 +14,7 @@
     <p class="noti">{{errIncorrectUsername}}</p>
     
     <button @click="login" :disabled='disabled'>Login</button>
+    <p>Already account? <router-link class="routerLink" to="/register">Register</router-link></p>
     
   </div>
 </template>
@@ -84,44 +85,5 @@ export default {
 </script>
 
 <style>
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: auto;
-    text-align: center;
-    font-family: arial;
-    padding: 1rem 0;
-  }
-  
 
-  .card button {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: red;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-    width: 70%;
-    font-size: 18px;
-  }
-
-  .card button:hover {
-    opacity: 0.7;
-  }
-  label {
-    margin-left: -8rem;
-  }
-  .card input {
-    /* border: 1px; */
-    border: 2px solid #eee;
-    width: 70%;
-    border-radius: 4px;
-    padding: .6em .6em;
-  }
-  .noti {
-    color: red;
-    font-size: small;
-  }
 </style>
