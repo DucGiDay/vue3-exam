@@ -2,16 +2,11 @@
   <div class="card">
     <h1>Login</h1>
 
-    <label for="username">Username:</label>
-    <br/>
-    <input v-model="username" type="text" id="username" name="username" placeholder="Username">
-    <p class="noti">{{errRequireUsername}}</p>
-
-    <label for="password">Password:</label>
-    <br/>
-    <input v-model="password" type="password" id="password" name="password" placeholder="Password">
-    <p class="noti">{{errRequirePassword}}</p>
-    <p class="noti">{{errIncorrectUsername}}</p>
+    <InputText v-model="username" v-bind:props="propsUserName"/>
+    <p v-if="errRequireUsername.length" class="noti">{{errRequireUsername}}</p>
+    <InputText v-model="username" v-bind:props="propsPassword" />
+    <p v-if="errRequirePassword.length" class="noti">{{errRequirePassword}}</p>
+    <p v-if="errIncorrectUsername.length" class="noti">{{errIncorrectUsername}}</p>
     
     <button @click="login" :disabled='disabled'>Login</button>
     <p>Already account? <router-link class="routerLink" to="/register">Register</router-link></p>
@@ -20,14 +15,20 @@
 </template>
 
 <script>
+import InputText from '../../components/children-components/InputText.vue'
 export default {
+  components: {
+    InputText
+  },
   data() {
     return {
       username: '',
       password: '',
       errRequireUsername: '',
       errRequirePassword: '',
-      errIncorrectUsername: ''
+      errIncorrectUsername: '',
+      propsUserName: {},
+      propsPassword: {}
     }
   },
 
@@ -35,6 +36,16 @@ export default {
     this.errRequireUsername = "Username is require"
     this.errRequirePassword = "Password is require"
     this.errIncorrectUsername = ""
+    this.propsUserName = {
+      label: "Username",
+      placeholder: "Username",
+      type: "text",
+    }
+    this.propsPassword = {
+      label: "Password",
+      placeholder: "Password",
+      type: "password",
+    }
   },
 
   watch: {
@@ -111,20 +122,6 @@ export default {
 
 .card button:hover {
   opacity: 0.7;
-}
-
-label {
-  position: absolute;
-  left: 13%;
-  /* right: inherit; */
-}
-
-.card input {
-  border: 2px solid #eee;
-  width: 70%;
-  border-radius: 4px;
-  padding: .6em .6em;
-  margin: .5rem 0 1.5rem;
 }
 
 .noti {
