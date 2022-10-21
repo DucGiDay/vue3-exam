@@ -32,9 +32,8 @@ export default {
     return {
       username: '',
       password: '',
-      errRequireUsername: '',
-      errRequirePassword: '',
-      errIncorrectUsername: ''
+      email: '',
+      fullName: ''
     }
   },
   mounted() {

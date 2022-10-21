@@ -7,13 +7,23 @@
     </div>
     <div class="aside-menu">
       <ul>
-        <li><router-link to="/">Go to view 1</router-link></li>
-        <li><router-link to="/view-2">Go to view 2</router-link></li>
+        <li><router-link to="#">Go to view 1</router-link></li>
+        <li><router-link to="#">Go to view 2</router-link></li>
       </ul>
     </div>
 
-    <div class="btn-logout">
-      <router-link to="/">Logout</router-link>
+    <div class="">
+      <!-- <router-link to="/test">Logout</router-link> -->
+      <button type="button" class="btn-logout" @click="showModal">
+        Log Out!
+      </button>
+      
+      <Modal 
+        v-show="isModalVisible" 
+        @close="closeModal" 
+        v-bind:props="props" 
+        v-on:accept-click="handleClickInParent"  
+      />
     </div>
   </div>
   <div class="main">
@@ -24,7 +34,48 @@
 </template>
 
 <script>
-export default {}
+import Modal from '../components/modals/LogoutModal.vue';
+export default {
+  name: 'AppLayout1',
+  components: {
+    Modal,
+  },
+  data() {
+    return {
+      isModalVisible: false,
+      title: "",
+      message: "",
+      acceptLabel: "",
+      cancelLabel: "",
+      props: {}
+    };
+  },
+  mounted() {
+    this.title = "SIGN OUT"
+    this.content = "Are you sure you wanna sign out?"
+    this.acceptLabel = "Accept"
+    this.cancelLabel = "Cancel"
+    this.props = {
+      title: this.title,
+      content: this.content,
+      acceptLabel: this.acceptLabel,
+      cancelLabel: this.cancelLabel
+    } // em chưa biết truyền cùng lúc nhiều biến cho component con nên em cho nó vào 1 object rồi vứt xuống :v
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
+    /// Hứng dữ liệu từ component con gửi lên
+    handleClickInParent (title, content) {
+      console.log("title: ", title)
+      console.log("content: ", content)
+    }
+  }
+};
 </script>
 
 <style scoped>
