@@ -2,9 +2,16 @@
   <div class="card">
     <h1>Login</h1>
 
-    <InputText v-model="username" v-bind:props="propsUserName"/>
+    <!-- <InputText v-model="username" v-bind:props="propsUserName"/> -->
+    <label for="username" class="label-input">Username:</label>
+    <br />
+    <InputText v-bind:props="propsUserName" v-on:model-value="getTextFromComponent" />
     <p v-if="errRequireUsername.length" class="noti">{{errRequireUsername}}</p>
-    <InputText v-model="username" v-bind:props="propsPassword" />
+
+    <!-- <InputText v-model="username" v-bind:props="propsPassword" /> -->
+    <label for="password" class="label-input">Password:</label>
+    <br />
+    <InputText v-bind:props="propsPassword" v-on:model-value="getTextFromComponent" />
     <p v-if="errRequirePassword.length" class="noti">{{errRequirePassword}}</p>
     <p v-if="errIncorrectUsername.length" class="noti">{{errIncorrectUsername}}</p>
     
@@ -39,11 +46,13 @@ export default {
     this.propsUserName = {
       label: "Username",
       placeholder: "Username",
+      idAndName:'username',
       type: "text",
     }
     this.propsPassword = {
       label: "Password",
       placeholder: "Password",
+      idAndName: 'password',
       type: "password",
     }
   },
@@ -76,6 +85,13 @@ export default {
     login() {
       console.log("username: ", this.username)
       console.log("password: ", this.password)
+    },
+    getTextFromComponent(temp, idAndName) {
+      if (idAndName === "username") {
+        this.username = temp
+      } else {
+        this.password = temp
+      }
     }
   },
   computed: {
